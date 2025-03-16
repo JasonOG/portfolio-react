@@ -1,0 +1,114 @@
+/* CSS Variables for theme colors */
+:root {
+    /* Common variables */
+    --transition-speed: 0.3s;
+    
+    /* Light theme variables (default) */
+    --bg-color: #ffffff;
+    --text-color: #24292e;
+    --heading-color: #2E4C6D;
+    --link-color: #2a78ba;
+    --link-hover-color: #1d5a8b;
+    --primary-color: #2a78ba;
+    --secondary-color: #f8f9fa;
+    --border-color: #e1e4e8;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --footer-bg: #2a78ba;
+    --footer-text: #ffffff;
+  }
+  
+  /* Dark theme variables */
+  .dark-theme {
+    --bg-color: #121212;
+    --text-color: #e6e6e6;
+    --heading-color: #5a9bd5;
+    --link-color: #58a6ff;
+    --link-hover-color: #79b9ff;
+    --primary-color: #3a8bda;
+    --secondary-color: #2d2d2d;
+    --border-color: #444444;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --footer-bg: #1a1a1a;
+    --footer-text: #e6e6e6;
+  }
+  
+  /* Apply theme colors to elements */
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    transition: color var(--transition-speed);
+  }
+  
+  a {
+    color: var(--link-color);
+    transition: color var(--transition-speed);
+  }
+  
+  a:hover {
+    color: var(--link-hover-color);
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .navbar {
+    background-color: var(--card-bg) !important;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .card, .accordion-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+  }
+  
+  .accordion-button {
+    background-color: var(--card-bg) !important;
+    color: var(--heading-color) !important;
+  }
+  
+  .footer {
+    background-color: var(--footer-bg);
+  }
+  
+  .footer p {
+    color: var(--footer-text);
+  }
+  
+  /* Theme toggle button positioning */
+  .theme-toggle {
+    position: fixed;
+    bottom: 35px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+  }
+  
+  /* Adjust scrollToTop button position to avoid overlap */
+  .scrollTop {
+    bottom: 160px;
+  }

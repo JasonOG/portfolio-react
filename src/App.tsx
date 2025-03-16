@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
-function App() {
+// Layout Components
+import Navbar from 'components/layout/Navbar';
+import Footer from 'components/layout/Footer';
+import ScrollToTop from 'components/ui/ScrollToTop';
+import ThemeToggle from 'components/ui/ThemeToggle';
+import LoadingSpinner from 'components/ui/LoadingSpinner';
+import AnalyticsRouteTracker from 'components/analytics/AnalyticsRouteTracker';
+
+// Analytics
+import { initGA } from 'utils/analytics';
+
+// Lazy load page components
+const HomePage = lazy(() => import('pages/HomePage'));
+const AboutPage = lazy(() => import('pages/AboutPage'));
+const ProjectsPage = lazy(() => import('pages/ProjectsPage'));
+const ContactPage = lazy(() => import('pages/ContactPage'));
+const SuccessPage = lazy(() => import('pages/SuccessPage'));
+
+const App: React.FC = () => {
+  // Initialize Google Analytics
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AnalyticsRouteTracker />
+      <Navbar />
+      <ScrollToTop />
+      <ThemeToggle />
+      <Suspense fallback={<LoadingSpinner />}>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;
