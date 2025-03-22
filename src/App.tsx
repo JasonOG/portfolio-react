@@ -2,6 +2,11 @@ import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
+// Styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'styles/global.css';
+import 'styles/theme.css';
+
 // Layout Components
 import Navbar from 'components/layout/Navbar';
 import Footer from 'components/layout/Footer';
@@ -19,11 +24,6 @@ const ProjectsPage = lazy(() => import('pages/ProjectsPage'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const SuccessPage = lazy(() => import('pages/SuccessPage'));
 const DashboardPage = lazy(() => import('pages/DashboardPage'));
-
-// Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'styles/global.css';
-import 'styles/theme.css';
 
 // Redirect handler component
 const RedirectHandler = () => {
