@@ -4,8 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'styles/global.css';
+import 'styles/theme.css';
 
 // Layout Components
 import Navbar from 'components/layout/Navbar';
@@ -23,6 +23,8 @@ const AboutPage = lazy(() => import('pages/AboutPage'));
 const ProjectsPage = lazy(() => import('pages/ProjectsPage'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const SuccessPage = lazy(() => import('pages/SuccessPage'));
+const DashboardPage = lazy(() => import('pages/DashboardPage'));
+
 
 const App: React.FC = () => {
   // Initialize Google Analytics
@@ -43,6 +45,8 @@ const App: React.FC = () => {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/success" element={<SuccessPage />} />
+            {/* Hidden route - not in navbar */}
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </AnimatePresence>
       </Suspense>
