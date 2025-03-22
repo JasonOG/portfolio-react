@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jason O'Grady Portfolio</title>
+  <script type="text/javascript">
+    // Single-page app routing for GitHub Pages
+    // MIT License: https://github.com/rafgraph/spa-github-pages
+    
+    // This script takes the current URL and converts the path and query
+    // string into just a query string, then redirects the browser to the
+    // new URL with only a query string and hash fragment,
+    // e.g. https://jasonog.dev/dashboard?path=dashboard
+    // Note: This 404.html file must be at least 512 bytes for it to work
+    // with Internet Explorer (it is currently > 512 bytes)
+
+    var segmentCount = 0;
+    var l = window.location;
+    
+    // GitHub Pages returns 404 for paths like /dashboard, but not for
+    // query paths like /?path=dashboard. This script converts one to the other.
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+<body>
+</body>
+</html>
