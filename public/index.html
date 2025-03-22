@@ -2,22 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <script>
-      // Check if we were redirected from another page
-      (function() {
-        const redirectPath = sessionStorage.getItem('redirectPath');
-        if (redirectPath) {
-          // Clear the stored path
-          sessionStorage.removeItem('redirectPath');
-          // Navigate to the correct path after the app loads
-          window.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-              window.history.replaceState(null, null, redirectPath);
-            }, 300);
-          });
-        }
-      })();
-    </script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
