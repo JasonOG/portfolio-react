@@ -4,12 +4,16 @@
   <meta charset="utf-8">
   <title>Jason O'Grady Portfolio</title>
   <script>
-    // Simpler redirection script for GitHub Pages SPA
-    sessionStorage.setItem('redirectPath', window.location.pathname);
-    window.location.href = '/';
+    // Improved redirection for GitHub Pages SPA
+    // Redirect with a path query parameter that React can read
+    var pathSegments = window.location.pathname.split('/');
+    var redirectPath = pathSegments.slice(1).join('/');
+    
+    // Redirect to home with the path as a query parameter
+    window.location.href = '/?redirect=' + encodeURIComponent(redirectPath);
   </script>
 </head>
 <body>
-  <p>Redirecting to homepage...</p>
+  <p>Redirecting to dashboard...</p>
 </body>
 </html>
