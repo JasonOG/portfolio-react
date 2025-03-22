@@ -7,6 +7,7 @@ interface LazyImageProps {
   width?: string | number;
   height?: string | number;
   placeholderColor?: string;
+  centered?: boolean;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
@@ -15,7 +16,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
   className = '',
   width,
   height,
-  placeholderColor = '#f0f0f0'
+  placeholderColor = '#f0f0f0',
+  centered = true
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -28,8 +30,14 @@ const LazyImage: React.FC<LazyImageProps> = ({
     setError(true);
   };
 
+  const containerStyle = centered ? { 
+    display: 'flex', 
+    justifyContent: 'center',
+    width: '100%'
+  } : {};
+
   return (
-    <>
+    <div style={containerStyle}>
       {!isLoaded && !error && (
         <div
           className={className}
@@ -51,6 +59,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
         loading="lazy"
         onLoad={handleLoad}
         onError={handleError}
+        style={{
+          maxWidth: '100%',
+          height: 'auto'
+        }}
       />
       {error && (
         <div
@@ -67,7 +79,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
           <span>Failed to load image</span>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

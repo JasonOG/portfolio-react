@@ -2,11 +2,15 @@ import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
+// Styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'styles/global.css';
+
 // Layout Components
 import Navbar from 'components/layout/Navbar';
 import Footer from 'components/layout/Footer';
 import ScrollToTop from 'components/ui/ScrollToTop';
-import ThemeToggle from 'components/ui/ThemeToggle';
 import LoadingSpinner from 'components/ui/LoadingSpinner';
 import AnalyticsRouteTracker from 'components/analytics/AnalyticsRouteTracker';
 
@@ -31,7 +35,6 @@ const App: React.FC = () => {
       <AnalyticsRouteTracker />
       <Navbar />
       <ScrollToTop />
-      <ThemeToggle />
       <Suspense fallback={<LoadingSpinner />}>
         <AnimatePresence mode="wait">
           <Routes>

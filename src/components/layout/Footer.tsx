@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <>
       <div className="footer-padding"></div>
@@ -17,7 +15,7 @@ const Footer: React.FC = () => {
         <Link to="/contact">
           <i className="icon fas fa-envelope fa-2x"></i>
         </Link>
-        <p>© Copyright {currentYear} Jason O'Grady</p>
+        <p>© Copyright 2020 Jason O'Grady</p>
       </div>
     </>
   );

@@ -1,4 +1,7 @@
-html {
+/* =======================================================
+   1. Global Styles
+   ======================================================= */
+   html {
     min-height: 100%;
     position: relative;
   }
@@ -7,6 +10,7 @@ html {
     font-family: "Montserrat", sans-serif;
   }
   
+  /* Typography */
   h1 {
     font-family: "Montserrat", sans-serif;
     color: #2E4C6D;
@@ -16,33 +20,12 @@ html {
   }
   
   p {
-    margin: 20px 20px 20px 20px;
+    margin: 20px;
     font-size: 1.1rem;
     font-weight: 400;
   }
   
-  .scrollTop {
-    position: fixed;
-    bottom: 110px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-size: 40px;
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    z-index: 100000;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.5s;
-  }
-  
-  .scrollTop.active {
-    visibility: visible;
-    opacity: 1;
-  }
-  
+  /* Paragraph variants */
   .p1 {
     margin: 40px 7% 60px 7%;
     font-size: 1.1rem;
@@ -67,12 +50,9 @@ html {
     font-weight: 300;
   }
   
-  .profile-pic {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-  }
-  
+  /* =======================================================
+     2. Layout Components
+     ======================================================= */
   .container-fluid {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -83,22 +63,9 @@ html {
     padding: 3%;
   }
   
-  .navbar-brand {
-    padding: 0 18px;
-  }
-  
-  .nav-item {
-    padding: 0 18px;
-  }
-  
-  .navbar-link {
-    font-size: 1.1rem;
-  }
-  
-  .navbar-nav {
-    font-size: 1.1rem;
-  }
-  
+  /* =======================================================
+     3. Navigation
+     ======================================================= */
   .navbar {
     padding-top: 20px;
     padding-bottom: 1px;
@@ -107,10 +74,52 @@ html {
     margin-bottom: 0;
   }
   
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 18px;
+  }
+  
+  .navbar-brand img {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+  }
+  
+  .nav-item {
+    padding: 0 18px;
+  }
+  
+  .navbar-link {
+    font-size: 1.5rem;
+    color: #2E4C6D;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .navbar-nav {
+    font-size: 1.1rem;
+  }
+  
   .navbar-nav li a:hover {
     color: #2a78ba !important;
   }
   
+  /* Active link styling */
+  .nav-link.active {
+    color: #2a78ba !important;
+    font-weight: 500;
+  }
+  
+  /* Prevent text selection on mobile menu toggle */
+  .navbar-toggler {
+    user-select: none;
+  }
+  
+  /* =======================================================
+     4. Buttons and Interactive Elements
+     ======================================================= */
   .btn {
     margin: 5% 1%;
     min-width: 20%;
@@ -148,10 +157,104 @@ html {
     color: #fff;
   }
   
+  /* Scroll to top button */
+  .scrollTop {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-size: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 100000;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+  }
+  
+  .scrollTop.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* =======================================================
+     5. Accordion Styles
+     ======================================================= */
   .accordion {
     padding: 3% 7% 0 7%;
   }
   
+  .accordion, .accordion-item {
+    background-color: #fff !important;
+    border-color: #ccc !important;
+    border: none !important;
+    margin: 0 10px !important;
+  }
+  
+  .accordion-button {
+    background-color: #fff !important;
+    cursor: pointer !important;
+    border: none !important;
+    border-width: 0 !important;
+    border-color: #fff !important;
+    outline: #fff !important;
+    color: #2E4C6D !important;
+    font-size: 1.3rem !important;
+  }
+  
+  .accordion-button:focus {
+    box-shadow: inherit;
+  }
+  
+  .accordion-border-color {
+    color: #2E4C6D !important;
+    border: none !important;
+    border-width: 0 !important;
+    border-color: #fff !important;
+  }
+  
+  .accordion-header {
+    background-color: #fff !important;
+  }
+  
+  /* =======================================================
+     6. Image Styles
+     ======================================================= */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .profile-pic {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+  }
+  
+  .d-block.w-50, .d-block.w-75, .d-block.w-100 {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .container-fluid2 img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+  
+  /* =======================================================
+     7. Footer Styles
+     ======================================================= */
   .footer-padding {
     margin-top: 60px;
     padding-bottom: 60px;
@@ -185,40 +288,9 @@ html {
     margin: 0 0 0 25px;
   }
   
-  .accordion, .accordion-item {
-    background-color: #fff !important;
-    border-color: #ccc !important;
-    border: none !important;
-    margin: 0 10px 0 10px !important;
-  }
-  
-  .accordion-button {
-    background-color:#fff !important;
-    cursor: pointer !important;
-    border: none !important;
-    border-width: 0 !important;
-    border-color: #fff !important;
-    outline: #fff !important;
-    color: #2E4C6D !important;
-    font-size: 1.3rem !important;
-  }
-  
-  .accordion-button:focus {
-    box-shadow: inherit;
-  }
-  
-  .accordion-border-color {
-    color: #2E4C6D !important;
-    border: none !important;
-    border-width: 0 !important;
-    border-color: #fff !important;
-  }
-  
-  .accordion-header{
-    background-color:#fff !important;
-  }
-  
-  /* Page transitions */
+  /* =======================================================
+     8. Page Transitions
+     ======================================================= */
   .page-transition-enter {
     opacity: 0;
     transform: translateY(20px);
@@ -239,4 +311,78 @@ html {
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 300ms, transform 300ms;
+  }
+  
+  /* =======================================================
+     9. Media Queries
+     ======================================================= */
+  @media (max-width: 991.98px) {
+    /* Navbar mobile styles */
+    .navbar-collapse {
+      transition: height 0.35s ease;
+    }
+    
+    .navbar-collapse.collapsing {
+      height: 0 !important;
+      overflow: hidden;
+      transition: height 0.35s ease;
+    }
+    
+    .navbar-collapse.show {
+      height: auto !important;
+      overflow-y: auto;
+    }
+    
+    .navbar-brand img {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .navbar-link {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /* Responsive images and typography */
+    .d-block.w-50 {
+      width: 90% !important;
+    }
+    
+    .d-block.w-75 {
+      width: 95% !important;
+    }
+    
+    .container-fluid2 img {
+      width: 100%;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    /* Button adjustments for mobile */
+    .btn {
+      min-width: 80%;
+      margin: 5px 10%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    /* Small mobile adjustments */
+    .profile-pic {
+      max-width: 200px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h4 {
+      font-size: 1.2rem;
+    }
+    
+    .p2 {
+      margin: 20px 5% 5px 5%;
+    }
   }

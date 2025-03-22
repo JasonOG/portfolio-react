@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from 'context/ThemeContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/global.css';
-import 'styles/theme.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const root = ReactDOM.createRoot(
@@ -16,9 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </HelmetProvider>
   </React.StrictMode>
 );
