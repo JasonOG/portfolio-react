@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
 
 interface Paper {
@@ -53,7 +53,7 @@ const ResearchPapersDashboard: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Import the predefined papers
-  const predefinedPapers = [
+  const predefinedPapers = useMemo(() => [
     // Foundational AI & Early Neural Networks
     { id: 1, title: "A Logical Calculus of the Ideas Immanent in Nervous Activity", authors: "McCulloch & Pitts", year: 1943, url: "https://doi.org/10.1007/BF02478259", modelType: "neural-network", description: "First mathematical model of a neural network", citations: [] },
     { id: 2, title: "Computing Machinery and Intelligence", authors: "Alan Turing", year: 1950, url: "https://doi.org/10.1093/mind/LIX.236.433", modelType: "general", description: "Introduced the Turing Test and foundational concepts of AI", citations: [] },
@@ -135,7 +135,7 @@ const ResearchPapersDashboard: React.FC = () => {
     { id: 68, title: "Neuro-Inspired Pooling for Multi-Species Classification", authors: "Anderson et al.", year: 2024, url: "https://doi.org/10.1038/s41598-024-51482-z", modelType: "bioacoustics", description: "Biologically-inspired pooling for multi-species classification", citations: [64, 65, 66] },
     { id: 69, title: "Energy-Efficient Distributed Bioacoustic Monitoring", authors: "Peterson et al.", year: 2024, url: "https://doi.org/10.1109/JIOT.2024.3352217", modelType: "bioacoustics", description: "Edge computing approaches for bioacoustic monitoring", citations: [51, 65, 68] },
     { id: 70, title: "Transformer-Based Multi-Modal Fusion for Biodiversity Monitoring", authors: "Reynolds et al.", year: 2024, url: "https://doi.org/10.1111/2041-210X.14123", modelType: "bioacoustics", description: "Transformer architecture for multi-modal biodiversity data", citations: [55, 63, 67, 68, 69] }
-  ];
+  ], []);
 
   // Get color for model type
   const getModelTypeColor = useCallback((modelType: string) => {
@@ -236,7 +236,7 @@ const ResearchPapersDashboard: React.FC = () => {
       const matchesYearRange = paper.year >= yearRangeFilter[0] && paper.year <= yearRangeFilter[1];
       
       return matchesSearch && matchesModelType && matchesYearRange;
-    });
+    }, [papers, modelTypeFilter, yearRangeFilter, searchTerm, searchPaper, getModelTypeColor, getModelTypeName]);
     
     // If no papers match filters, show a message
     if (filteredPapers.length === 0) {
@@ -428,7 +428,7 @@ const ResearchPapersDashboard: React.FC = () => {
       .attr("y", 25)
       .text("Citation")
       .style("font-size", "12px");
-  }, [papers, modelTypeFilter, yearRangeFilter, searchPaper, getModelTypeColor, getModelTypeName]);
+  }, [papers, modelTypeFilter, yearRangeFilter, searchPaper, searchTerm, getModelTypeColor, getModelTypeName]);
 
   // Load papers on initial render
   useEffect(() => {
