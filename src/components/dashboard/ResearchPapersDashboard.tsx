@@ -52,6 +52,7 @@ const ResearchPapersDashboard: React.FC = () => {
   const tooltipRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Import the predefined papers
   const predefinedPapers = [
     // Foundational AI & Early Neural Networks
     { id: 1, title: "A Logical Calculus of the Ideas Immanent in Nervous Activity", authors: "McCulloch & Pitts", year: 1943, url: "https://doi.org/10.1007/BF02478259", modelType: "neural-network", description: "First mathematical model of a neural network", citations: [] },
@@ -136,36 +137,8 @@ const ResearchPapersDashboard: React.FC = () => {
     { id: 70, title: "Transformer-Based Multi-Modal Fusion for Biodiversity Monitoring", authors: "Reynolds et al.", year: 2024, url: "https://doi.org/10.1111/2041-210X.14123", modelType: "bioacoustics", description: "Transformer architecture for multi-modal biodiversity data", citations: [55, 63, 67, 68, 69] }
   ];
 
-  // Load papers on initial render
-  useEffect(() => {
-    setPapers(predefinedPapers);
-    setImportedPapers(predefinedPapers);
-  }, []);
-
-  // Resize handler for responsive SVG
-  const handleResize = useCallback(() => {
-    if (papers.length > 0) {
-      drawGraph();
-    }
-  }, [papers]);
-
-  // Set up resize listener
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [handleResize]);
-
-  // Redraw graph when filters change
-  useEffect(() => {
-    if (papers.length > 0) {
-      drawGraph();
-    }
-  }, [papers, modelTypeFilter, yearRangeFilter]);
-
   // Get color for model type
-  const getModelTypeColor = (modelType: string) => {
+  const getModelTypeColor = useCallback((modelType: string) => {
     const colorMap: {[key: string]: string} = {
       'general': '#6c757d',
       'neural-network': '#007bff',
@@ -187,10 +160,10 @@ const ResearchPapersDashboard: React.FC = () => {
       'neuromorphic': '#e91e63'
     };
     return colorMap[modelType] || '#6c757d';
-  };
+  }, []);
 
   // Get readable name for model type
-  const getModelTypeName = (modelType: string) => {
+  const getModelTypeName = useCallback((modelType: string) => {
     const nameMap: {[key: string]: string} = {
       'general': 'General AI',
       'neural-network': 'Neural Network',
@@ -212,10 +185,10 @@ const ResearchPapersDashboard: React.FC = () => {
       'neuromorphic': 'Neuromorphic Computing'
     };
     return nameMap[modelType] || modelType;
-  };
+  }, []);
 
   // Enhanced comprehensive search function
-  const searchPaper = (paper: Paper, term: string) => {
+  const searchPaper = useCallback((paper: Paper, term: string) => {
     if (!term) return true;
     
     const searchTerm = term.toLowerCase();
@@ -232,15 +205,15 @@ const ResearchPapersDashboard: React.FC = () => {
       paper.year.toString().includes(searchTerm) ||
       getModelTypeName(paper.modelType).toLowerCase().includes(searchTerm)
     );
-  };
+  }, [getModelTypeName]);
 
-  // Draw the visualization graph
-  const drawGraph = () => {
+  // Draw the visualization graph - moved up and wrapped in useCallback
+  const drawGraph = useCallback(() => {
     if (!svgRef.current || !containerRef.current) return;
     
     // Get container dimensions for responsive sizing
     const containerWidth = containerRef.current.clientWidth;
-    const containerHeight = Math.min(window.innerHeight * 3, 1600); // Limit height
+    const containerHeight = Math.min(window.innerHeight * 0.6, 600); // Limit height
     
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
@@ -455,8 +428,36 @@ const ResearchPapersDashboard: React.FC = () => {
       .attr("y", 25)
       .text("Citation")
       .style("font-size", "12px");
-  };
-  
+  }, [papers, modelTypeFilter, yearRangeFilter, searchPaper, getModelTypeColor, getModelTypeName]);
+
+  // Load papers on initial render
+  useEffect(() => {
+    setPapers(predefinedPapers);
+    setImportedPapers(predefinedPapers);
+  }, [predefinedPapers]);
+
+  // Resize handler for responsive SVG
+  const handleResize = useCallback(() => {
+    if (papers.length > 0) {
+      drawGraph();
+    }
+  }, [papers, drawGraph]);
+
+  // Set up resize listener
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
+
+  // Redraw graph when filters change
+  useEffect(() => {
+    if (papers.length > 0) {
+      drawGraph();
+    }
+  }, [papers, modelTypeFilter, yearRangeFilter, drawGraph]);
+
   // Generate BibTeX key according to standard format: FirstAuthorLastName[Year]
   const generateBibTexKey = (authors: string, year: number) => {
     if (!authors) return `Unknown${year}`;
@@ -597,7 +598,7 @@ const ResearchPapersDashboard: React.FC = () => {
   
   return (
     <div className="min-h-screen p-4">
-      <h1 className="text-center mb-6">Honours Thesis Research Papers</h1>
+      <h1 className="text-center mb-6">Research Papers Network Visualization</h1>
       
       <div className="row mb-4">
         <div className="col-md-3">
@@ -836,7 +837,7 @@ const ResearchPapersDashboard: React.FC = () => {
                 </div>
               </div>
               <p className="small text-muted mb-2">★ = Highlighted as relevant paper</p>
-              <div style={{height: '1600px', overflowY: 'auto'}}>
+              <div style={{height: '400px', overflowY: 'auto'}}>
                 <ul className="list-group">
                   {importedPapers.map(paper => (
                     <li 
@@ -868,7 +869,7 @@ const ResearchPapersDashboard: React.FC = () => {
         
         <div className="col-md-9">
           <div className="card shadow overflow-hidden">
-            <div ref={containerRef} style={{position: 'relative', height: '1600px'}}>
+            <div ref={containerRef} style={{position: 'relative'}}>
               <svg ref={svgRef}></svg>
               <div 
                 ref={tooltipRef} 
@@ -1003,7 +1004,9 @@ const ResearchPapersDashboard: React.FC = () => {
       </div>
       
       <div className="text-center small text-muted mt-4">
+        <p>This visualization shows relationships between research papers in AI, machine learning, and bioacoustics.</p>
         <p>Black lines show influence between papers in the same field. Blue lines show direct citations.</p>
+        <p>Click on a paper node to see details. Star papers to mark them as relevant for your research.</p>
       </div>
     </div>
   );
