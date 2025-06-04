@@ -1,10 +1,14 @@
 // src/pages/Temp404Page.tsx
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Bouncing404 from 'components/ui/Bouncing404';
 
-// Your bouncing 404 component (paste the component I just made here)
-const Bouncing404: React.FC = () => {
-  // ... paste the entire component from above
+const Temp404Page: React.FC = () => {
+  return (
+    <motion.div /* blah blah */>
+      <Bouncing404 />
+    </motion.div>
+  );
 };
 
 // Page wrapper with your existing animation structure
