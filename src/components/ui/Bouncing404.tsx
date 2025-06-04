@@ -1,4 +1,12 @@
+// src/components/ui/Bouncing404.tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+
+// Colors array outside component to prevent re-creation
+const colors = [
+  '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
+  '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43',
+  '#10ac84', '#ee5a24', '#0984e3', '#a29bfe', '#fd79a8'
+];
 
 const Bouncing404: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -10,13 +18,7 @@ const Bouncing404: React.FC = () => {
   const [displayPosition, setDisplayPosition] = useState({ x: 100, y: 100 });
   const [color, setColor] = useState('#ff6b6b');
 
-  const colors = [
-    '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
-    '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43',
-    '#10ac84', '#ee5a24', '#0984e3', '#a29bfe', '#fd79a8'
-  ];
-
-  const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
+  const getRandomColor = useCallback(() => colors[Math.floor(Math.random() * colors.length)], []);
 
   const animate = useCallback(() => {
     if (!containerRef.current || !textRef.current) {
@@ -70,7 +72,7 @@ const Bouncing404: React.FC = () => {
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, []);
+  }, [getRandomColor]);
 
   useEffect(() => {
     // Start animation
@@ -106,7 +108,7 @@ const Bouncing404: React.FC = () => {
   }, []);
 
   // Handle click to add more chaos
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     // Randomize velocity on click
     velocityRef.current = {
       x: (Math.random() - 0.5) * 8,
@@ -120,7 +122,7 @@ const Bouncing404: React.FC = () => {
       velocityRef.current.y = velocityRef.current.y > 0 ? 2 : -2;
     }
     setColor(getRandomColor());
-  };
+  }, [getRandomColor]);
 
   return (
     <div 
@@ -195,10 +197,10 @@ const Bouncing404: React.FC = () => {
         }}
       >
         <div style={{ marginBottom: '10px', opacity: 0.8 }}>
-          Click anywhere to change direction
+          Click anywhere to change direction • Press any key to escape
         </div>
         <div style={{ opacity: 0.5, fontSize: '12px' }}>
-          ~  ~
+          ~ Authentic DVD Screensaver Experience ~
         </div>
       </div>
     </div>
