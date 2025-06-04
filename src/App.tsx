@@ -1,4 +1,4 @@
-// src/App.tsx (TEMPORARY MODIFICATION)
+// src/App.tsx (TEMPORARY MODIFICATION - All imports at top)
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -13,7 +13,12 @@ import AnalyticsRouteTracker from 'components/analytics/AnalyticsRouteTracker';
 // Analytics
 import { initGA } from 'utils/analytics';
 
-// Lazy load page components
+// Styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'styles/global.css';
+import 'styles/theme.css';
+
+// Lazy load page components (ALL AT THE TOP LIKE ESLINT DEMANDS)
 const HomePage = lazy(() => import('pages/HomePage')); // Keep original for easy restore
 const Temp404Page = lazy(() => import('pages/Temp404Page')); // Your new chaos page
 const AboutPage = lazy(() => import('pages/AboutPage'));
@@ -21,11 +26,6 @@ const ProjectsPage = lazy(() => import('pages/ProjectsPage'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const SuccessPage = lazy(() => import('pages/SuccessPage'));
 const DashboardPage = lazy(() => import('pages/DashboardPage'));
-
-// Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'styles/global.css';
-import 'styles/theme.css';
 
 const App: React.FC = () => {
   // Initialize Google Analytics
@@ -44,7 +44,6 @@ const App: React.FC = () => {
           <Routes>
             {/* TEMPORARY: Replace HomePage with Temp404Page */}
             <Route path="/" element={<Temp404Page />} />
-            {/* <Route path="/" element={<HomePage />} /> */}
             
             {/* Keep all other routes normal (in case people bookmark them) */}
             <Route path="/about" element={<AboutPage />} />
