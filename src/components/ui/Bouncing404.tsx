@@ -197,10 +197,10 @@ const Bouncing404: React.FC = () => {
         }}
       >
         <div style={{ marginBottom: '10px', opacity: 0.8 }}>
-          Click anywhere to change direction • Press any key to escape
+          Click anywhere to change direction
         </div>
         <div style={{ opacity: 0.5, fontSize: '12px' }}>
-          ~ Authentic DVD Screensaver Experience ~
+          ~ SITE IS DOWN TEMPORARILY FOR MAINTENANCE ~
         </div>
       </div>
     </div>
