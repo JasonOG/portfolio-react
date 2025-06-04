@@ -44,6 +44,7 @@ const App: React.FC = () => {
           <Routes>
             {/* TEMPORARY: Replace HomePage with Temp404Page */}
             <Route path="/" element={<Temp404Page />} />
+            {/* <Route path="/" element={<HomePage />} /> */}
             
             {/* Keep all other routes normal (in case people bookmark them) */}
             <Route path="/about" element={<AboutPage />} />
