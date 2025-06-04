@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 // Layout Components
-import Navbar from 'components/layout/Navbar';
-import Footer from 'components/layout/Footer';
+// import Navbar from 'components/layout/Navbar'; // Temporarily disabled
+// import Footer from 'components/layout/Footer'; // Temporarily disabled
 import ScrollToTop from 'components/ui/ScrollToTop';
 import LoadingSpinner from 'components/ui/LoadingSpinner';
 import AnalyticsRouteTracker from 'components/analytics/AnalyticsRouteTracker';
