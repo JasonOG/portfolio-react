@@ -1,10 +1,6 @@
+// src/App.tsx (TEMPORARY MODIFICATION)
 import React, { Suspense, lazy, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-
-// Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'styles/global.css';
-import 'styles/theme.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 // Layout Components
@@ -18,12 +14,18 @@ import AnalyticsRouteTracker from 'components/analytics/AnalyticsRouteTracker';
 import { initGA } from 'utils/analytics';
 
 // Lazy load page components
-const HomePage = lazy(() => import('pages/HomePage'));
+const HomePage = lazy(() => import('pages/HomePage')); // Keep original for easy restore
+const Temp404Page = lazy(() => import('pages/Temp404Page')); // Your new chaos page
 const AboutPage = lazy(() => import('pages/AboutPage'));
 const ProjectsPage = lazy(() => import('pages/ProjectsPage'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const SuccessPage = lazy(() => import('pages/SuccessPage'));
 const DashboardPage = lazy(() => import('pages/DashboardPage'));
+
+// Styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'styles/global.css';
+import 'styles/theme.css';
 
 const App: React.FC = () => {
   // Initialize Google Analytics
@@ -34,22 +36,29 @@ const App: React.FC = () => {
   return (
     <Router>
       <AnalyticsRouteTracker />
-      <Navbar />
+      {/* TEMPORARILY HIDE NAVBAR FOR FULL CHAOS EFFECT */}
+      {/* <Navbar /> */}
       <ScrollToTop />
       <Suspense fallback={<LoadingSpinner />}>
         <AnimatePresence mode="wait">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            {/* TEMPORARY: Replace HomePage with Temp404Page */}
+            <Route path="/" element={<Temp404Page />} />
+            
+            {/* Keep all other routes normal (in case people bookmark them) */}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/success" element={<SuccessPage />} />
-            {/* Hidden route - not in navbar */}
             <Route path="/dashboard" element={<DashboardPage />} />
+            
+            {/* Emergency escape route - your original homepage */}
+            <Route path="/real-home" element={<HomePage />} />
           </Routes>
         </AnimatePresence>
       </Suspense>
-      <Footer />
+      {/* TEMPORARILY HIDE FOOTER TOO */}
+      {/* <Footer /> */}
     </Router>
   );
 };
