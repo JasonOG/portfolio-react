@@ -1,41 +1,52 @@
 // src/pages/Temp404Page.tsx
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Bouncing404 from 'components/ui/Bouncing404';
+import Bouncing404 from '../components/ui/Bouncing404';
 
-const Temp404Page: React.FC = () => {
-  return (
-    <motion.div /* blah blah */>
-      <Bouncing404 />
-    </motion.div>
-  );
+// Animation variants for the page transition
+const pageVariants = {
+  initial: { opacity: 0 },
+  in: { opacity: 1 },
+  out: { opacity: 0 }
 };
 
-// Page wrapper with your existing animation structure
+const pageTransition = {
+  type: 'tween',
+  ease: 'anticipate',
+  duration: 0.5
+};
+
 const Temp404Page: React.FC = () => {
-  // Optional: Add some audio if you really want to torture your visitors
   useEffect(() => {
-    // Uncomment this if you want to add the classic Windows error sound
-    // const audio = new Audio('/path/to/windows-error.wav');
-    // audio.play().catch(() => {}); // Ignore autoplay restrictions
+    // Optional: Change the page title for extra chaos
+    const originalTitle = document.title;
+    document.title = "ERROR ERROR ERROR - 404 NOT FOUND";
     
     // Add keyboard listener to escape
-    const handleKeyPress = () => {
-      // You could redirect back to normal homepage or show a modal
+    const handleKeyPress = (event: KeyboardEvent) => {
       console.log('User tried to escape the madness!');
-      // window.location.href = '/about'; // Emergency escape route
+      // Optional: Add escape route
+      // if (event.key === 'Escape') {
+      //   window.location.href = '/about';
+      // }
     };
 
     window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    
+    // Cleanup
+    return () => {
+      document.title = originalTitle;
+      window.removeEventListener('keydown', handleKeyPress);
+    };
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
     >
       <Bouncing404 />
     </motion.div>
